@@ -23,8 +23,6 @@ export function SignUp() {
   const [career, setcareer] = useState('');
   const [parallel, setParallel] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertType, setAlertType] = useState('');
@@ -74,26 +72,29 @@ export function SignUp() {
     event.preventDefault();
     if (!validateForm()) return;
 
-    const formData = new FormData();
-    formData.append('username', username);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('firstName', firstName);
-    formData.append('lastName', lastName);
-    formData.append('address', address);
-    formData.append('phone', phone);
-    formData.append('semester', semester);
-    formData.append('career', career);
-    formData.append('parallel', parallel);
-    formData.append('description', description);
-    if (image) {
-      formData.append('image', image);
-    }
+    const payload = {
+      username,
+      email,
+      password,
+      firstName,
+      lastName,
+      address,
+      phone,
+      semester,
+      career,
+      parallel,
+      description,
+    };
+
+    console.log('Payload:', payload); // Imprimir la petición en la consola
 
     try {
       const response = await fetch(import.meta.env.VITE_API_REGISTER, {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
       });
       const data = await response.json();
       if (response.ok) {
@@ -199,14 +200,6 @@ export function SignUp() {
           return rest;
         });
       }
-    }
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-      setImagePreview(URL.createObjectURL(file));
     }
   };
 
@@ -461,26 +454,6 @@ export function SignUp() {
               rows={4}
             />
             {errors.description && <Typography variant="small" color="red">{errors.description}</Typography>}
-            <Typography variant="small" color="blue-gray" className="-mb-3 font-medium">
-              Profile Image
-            </Typography>
-            <div className="flex items-center justify-center w-full">
-              <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100">
-                <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                  {imagePreview ? (
-                    <img src={imagePreview} alt="Preview" className="h-32 w-32 object-cover rounded-full mb-3" />
-                  ) : (
-                    <svg aria-hidden="true" className="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16V8m0 0l-4 4m4-4l4 4m5 4h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2m-6 10h6m-6 0a2 2 0 01-2-2v-2a2 2 0 012-2h6a2 2 0 012 2v2a2 2 0 01-2 2m-6 0V8m0 0l-4 4m4-4l4 4"></path>
-                    </svg>
-                  )}
-                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                  {image && <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{image.name}</p>}
-                </div>
-                <input id="dropzone-file" type="file" className="hidden" onChange={handleImageChange} />
-              </label>
-            </div>
           </div>
           <Checkbox
             label={

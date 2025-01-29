@@ -127,28 +127,27 @@ export function Profile() {
     const token = localStorage.getItem("token");
 
     if (userId && token) {
-      const formDataToSend = new FormData();
-      formDataToSend.append('username', formData.username);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('firstName', formData.firstName);
-      formDataToSend.append('lastName', formData.lastName);
-      formDataToSend.append('address', formData.address);
-      formDataToSend.append('phone', formData.phone);
-      formDataToSend.append('semester', formData.semester);
-      formDataToSend.append('career', formData.career);
-      formDataToSend.append('parallel', formData.parallel);
-      formDataToSend.append('description', formData.description);
-      // if (formData.image) {
-      //   formDataToSend.append('image', formData.image);
-      // }
+      const payload = {
+        username: formData.username,
+        email: formData.email,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        address: formData.address,
+        phone: formData.phone,
+        semester: formData.semester,
+        career: formData.career,
+        parallel: formData.parallel,
+        description: formData.description,
+      };
 
       try {
         const response = await fetch(`${import.meta.env.VITE_API_UPDATE_PROFILE}/${userId}?token=${token}`, {
-          method: 'PATCH',
+          method: 'PUT',
           headers: {
+            'Content-Type': 'application/json',
             accept: "*/*",
           },
-          body: formDataToSend,
+          body: JSON.stringify(payload),
         });
 
         if (response.ok) {
