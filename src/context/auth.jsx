@@ -25,10 +25,10 @@ export const AuthProvider = ({ children }) => {
       const userId = localStorage.getItem('userId');
       const token = localStorage.getItem('token');
   
-      const response = await fetch(`${import.meta.env.VITE_API_LOGOUT}/${userId}/${token}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_LOGOUT}/${userId}?token=${token}`, {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
+          'accept': '*/*'
         },
         body: ''
       });
@@ -37,8 +37,8 @@ export const AuthProvider = ({ children }) => {
         throw new Error(`Logout failed: ${response.statusText}`);
       }
   
-      const { message } = await response.json();
-      console.log(message || "Logout successful");
+      const data = await response.text();
+      console.log(data || "Logout successful");
   
     } catch (error) {
       console.error('Error:', error.message);

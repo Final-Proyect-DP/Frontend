@@ -30,14 +30,18 @@ const Mapgen = () => {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_MAPGENERATOR}?userId=${userId}&token=${token}&theme=${theme}&considerations=${considerations}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "accept": "application/json",
-        },
-        body: JSON.stringify({}),
-      });
+      const encodedTheme = encodeURIComponent(theme);
+      const encodedConsiderations = encodeURIComponent(considerations);
+      
+      const response = await fetch(
+        `${import.meta.env.VITE_API_MAPGENERATOR}?userId=${userId}&token=${token}&theme=${encodedTheme}&considerations=${encodedConsiderations}`, 
+        {
+          method: "GET",
+          headers: {
+            "accept": "application/json"
+          }
+        }
+      );
 
       const data = await response.json().catch(() => null);
       if (response.ok && data) {
@@ -47,8 +51,8 @@ const Mapgen = () => {
         } else {
           console.error("Failed to parse graphviz code");
         }
-        setTheme(""); // Clear the theme field
-        setConsiderations(""); // Clear the considerations field
+        setTheme(""); 
+        setConsiderations(""); 
       } else {
         console.error("Failed to send message:", data ? data.message : "No response data");
       }
@@ -113,8 +117,8 @@ const Mapgen = () => {
           <div className="flex mb-4">
             <Button onClick={handleSendMessage} className="mr-4">Send</Button>
             <Button onClick={handleExportImage} className="mr-4">Export</Button>
-            <Button onClick={() => handleZoom(true)} className="mr-2">Zoom In</Button>
-            <Button onClick={() => handleZoom(false)}>Zoom Out</Button>
+            {/* <Button onClick={() => handleZoom(true)} className="mr-2">Zoom In</Button>
+            <Button onClick={() => handleZoom(false)}>Zoom Out</Button> */}
           </div>
           <div id="graphviz-container" ref={graphvizContainerRef} className="flex-1 overflow-auto w-full h-full"></div>
         </CardBody>

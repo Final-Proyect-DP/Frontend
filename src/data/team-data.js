@@ -3,7 +3,7 @@ export const teamData = [
   {
     img: "/img/team-2.jpg",
     name: "Kenneth Taipe",
-    position: "Full Stack Developer",
+    position: "Developer of Auth, User, and AI modules.",
     socials: [
       {
         color: "black",
