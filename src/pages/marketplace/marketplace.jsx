@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
 const GET_PRODUCTS_SERVER = import.meta.env.VITE_API_GET_PRODUCTS;
-const GET_CATEGORY_SERVER = import.meta.env.VITE_API_GET_CATEGORY;
-const GET_USER_SERVER = import.meta.env.VITE_API_GET_USER;
+const GET_CATEGORY_SERVER = import.meta.env.VITE_API_GET_CATEGORY_BY_ID;
+const GET_USER_SERVER = import.meta.env.VITE_API_GET_USER_BY_ID;
 
 const fetchProducts = async () => {
   try {
@@ -18,21 +18,32 @@ const fetchProducts = async () => {
       throw new Error('Products response is not an array');
     }
 
-    const productsWithDetails = await Promise.all(responseData.products.map(async (product) => {
-      const userResponse = await fetch(`${GET_USER_SERVER}/${product.userId}`);
-      if (!userResponse.ok) {
-        throw new Error('Failed to fetch user details');
-      }
-      const user = await userResponse.json();
+    const token = localStorage.getItem('token');
+    const requesterId = localStorage.getItem('userId');
 
-      let category = {};
-      if (product.category_id) {
-        const categoryResponse = await fetch(`${GET_CATEGORY_SERVER}/${product.category_id}`);
-        if (!categoryResponse.ok) {
-          throw new Error('Failed to fetch category details');
+    const productsWithDetails = await Promise.all(responseData.products.map(async (product) => {
+      console.log(`Fetching user details for user ID: ${product.userId}`); // Log the user ID
+      let user = { firstName: 'No se pudo obtener', lastName: 'información' };
+      try {
+        const userResponse = await fetch(`${GET_USER_SERVER}/${product.userId}?token=${token}&requesterId=${requesterId}`);
+        if (userResponse.ok) {
+          user = await userResponse.json();
         }
-        const categoryData = await categoryResponse.json();
-        category = categoryData.category;
+      } catch (error) {
+        console.error('Failed to fetch user details:', error);
+      }
+
+      let category = { name: 'No se pudo obtener información' };
+      if (product.category_id) {
+        try {
+          const categoryResponse = await fetch(`${GET_CATEGORY_SERVER}/${product.category_id}`);
+          if (categoryResponse.ok) {
+            const categoryData = await categoryResponse.json();
+            category = categoryData.category;
+          }
+        } catch (error) {
+          console.error('Failed to fetch category details:', error);
+        }
       }
 
       return { ...product, user, category };
@@ -63,6 +74,10 @@ const Marketplace = () => {
 
   const convertBinaryToImageSrc = (binaryData) => {
     return `data:image/jpeg;base64,${btoa(binaryData)}`;
+  };
+
+  const handleProductClick = (productId) => {
+    navigate(`/marketplace/product-detail/${productId}`);
   };
 
   return (
@@ -144,7 +159,7 @@ const Marketplace = () => {
             </div>
             <button
               className="ml-4 py-2 px-4 bg-gradient-to-r from-gray-300 to-gray-500 text-black rounded hover:from-gray-400 hover:to-gray-600"
-              onClick={() => navigate('/marketplace/create-product')}
+              onClick={() => navigate('/marketplace/CreateProduct')}
             >
               + Crear publicación
             </button>
@@ -159,7 +174,11 @@ const Marketplace = () => {
             <h2 className="text-xl font-bold mb-4">Destacados de hoy</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {products.map((product) => (
-                <div key={product.id} className="bg-gray-200 p-4 rounded text-left text-black shadow-lg">
+                <div
+                  key={product.id}
+                  className="bg-gray-200 p-4 rounded text-left text-black shadow-lg cursor-pointer"
+                  onClick={() => handleProductClick(product.id)}
+                >
                   <img
                     src={convertBinaryToImageSrc(product.image_data)}
                     alt={product.name}
@@ -167,9 +186,8 @@ const Marketplace = () => {
                   />
                   <p className="font-bold text-lg">{product.price} $</p>
                   <p className="truncate">{product.name}</p>
-                  <p className="truncate">{product.description}</p>
-                  <p>Category: {product.category.name || 'N/A'}</p>
-                  <p>Seller: {product.user.firstName} {product.user.lastName}</p>
+                  <p className="text-sm">{product.user.firstName} {product.user.lastName}</p> {/* Display user's full name */}
+                  <p className="text-sm">{product.category.name}</p> {/* Display category name */}
                 </div>
               ))}
             </div>

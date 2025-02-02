@@ -31,9 +31,22 @@ function App() {
             />
           )
         )}
-        {routes.concat(hiddenRoutes).map(
-          ({ path, element }, key) =>
-            element && <Route key={key} exact path={path} element={element} />
+        {hiddenRoutes.map(
+          ({ path, element, protected: isProtected }, key) =>
+            element && (
+              <Route
+                key={key}
+                exact
+                path={path}
+                element={
+                  isProtected && !isAuthenticated ? (
+                    <Navigate to="/sign-in" replace />
+                  ) : (
+                    element
+                  )
+                }
+              />
+            )
         )}
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
