@@ -93,6 +93,7 @@ const CreateProduct = () => {
       console.error('Error creating product:', error);
       alert('Error creating product');
     }
+    
   };
 
   const handleCardClick = (productId) => {
