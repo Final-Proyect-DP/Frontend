@@ -56,8 +56,15 @@ export function PasswordRecovery() {
           const email = localStorage.getItem("email");
           const response = await fetch(import.meta.env.VITE_API_RESET_PASSWORD, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ mail: email, resetCode: code, newPassword: password }),
+            headers: { 
+              "Content-Type": "application/json",
+              "accept": "*/*"
+            },
+            body: JSON.stringify({ 
+              email: email,           // cambio de mail a email
+              resetCode: code,
+              newPassword: password 
+            }),
           });
           const data = await response.json();
           if (response.ok) {
