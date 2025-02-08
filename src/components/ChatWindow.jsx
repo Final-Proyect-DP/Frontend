@@ -24,7 +24,7 @@ const ChatWindow = ({ isOpen, toggleChatWindow, user, userId2 }) => {
     }
 
     const handleClickOutside = (event) => {
-      if (chatWindowRef.current && !chatWindowRef.current.contains(event.target)) {
+      if (chatWindowRef.current && !chatWindowRef.current.contains(event.target) && event.target.id !== 'messageInput') {
         toggleChatWindow();
       }
     };
@@ -63,6 +63,10 @@ const ChatWindow = ({ isOpen, toggleChatWindow, user, userId2 }) => {
 
         socketRef.current.on('receive_message', (message) => {
           setMessages(prevMessages => [...prevMessages, message]);
+          // Scroll to the bottom of the chat window
+          setTimeout(() => {
+            chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+          }, 100);
         });
       })
       .catch(error => console.error('Error starting chat:', error));
@@ -81,6 +85,10 @@ const ChatWindow = ({ isOpen, toggleChatWindow, user, userId2 }) => {
       const data = await response.json();
       console.log('Messages fetched from API:', data); // Debug log
       setMessages(data);
+      // Scroll to the bottom of the chat window
+      setTimeout(() => {
+        chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+      }, 100);
     } catch (error) {
       console.error('Error fetching messages:', error);
     }
@@ -106,6 +114,10 @@ const ChatWindow = ({ isOpen, toggleChatWindow, user, userId2 }) => {
           setMessages(prevMessages => [...prevMessages, messageData]);
           // Save the conversation to the chat list
           socketRef.current.emit('save_conversation', { chatId, userId1, userId2, user });
+          // Scroll to the bottom of the chat window
+          setTimeout(() => {
+            chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+          }, 100);
         }
       });
 
@@ -127,12 +139,12 @@ const ChatWindow = ({ isOpen, toggleChatWindow, user, userId2 }) => {
     <MDBContainer fluid className="chat-container">
       <MDBCard className="chat-card">
         <MDBCardHeader className="chat-header">
-          <h5 className="mb-0">{user ? `Chat with ${user.firstName} ${user.lastName}` : 'Chat'}</h5>
+          <h5 className="mb-0">{user ? `${user.firstName} ${user.lastName}'s product` : 'Chat'}</h5>
           <MDBBtn color="light" size="sm" rippleColor="dark" onClick={toggleChatWindow}>
             <MDBIcon fas icon="times" />
           </MDBBtn>
         </MDBCardHeader>
-        <MDBCardBody className="chat-body">
+        <MDBCardBody className="chat-body" ref={chatWindowRef}>
           {messages.map((message, index) => (
             <div
               key={index}

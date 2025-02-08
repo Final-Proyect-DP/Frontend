@@ -8,10 +8,22 @@ const FloatingButton = () => {
   const [chats, setChats] = useState([]);
   const chatListRef = useRef(null);
   const socketRef = useRef(null);
+  const [userId1, setUserId1] = useState(null);
+  const [userId2, setUserId2] = useState(null);
+  const [token, setToken] = useState(null);
+  const [requesterId, setRequesterId] = useState(null);
 
   const toggleChatList = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
+    setUserId1(userId);
+    setToken(token);
+    setRequesterId(userId);
+  }, []);
 
   useEffect(() => {
     if (!socketRef.current) {
@@ -31,6 +43,9 @@ const FloatingButton = () => {
         const data = await response.json();
         console.log('Chats fetched from API:', data); // Debug log
         setChats(data);
+        if (data.length > 0) {
+          setUserId2(data[0].userId2); // Assuming userId2 is in the chat data
+        }
       } catch (error) {
         console.error('Error fetching chats:', error);
       }
@@ -61,7 +76,15 @@ const FloatingButton = () => {
       </button>
       {isOpen && (
         <div ref={chatListRef}>
-          <ChatList isOpen={isOpen} toggleChatList={toggleChatList} chats={chats} />
+          <ChatList
+            isOpen={isOpen}
+            toggleChatList={toggleChatList}
+            chats={chats}
+            userId1={userId1}
+            userId2={userId2}
+            token={token}
+            requesterId={requesterId}
+          />
         </div>
       )}
     </>
