@@ -6,7 +6,7 @@ const VITE_API_GET_USER = import.meta.env.VITE_API_GET_USER;
 
 const ChatList = ({ isOpen, toggleChatList, chats, userId1, userId2, token, requesterId }) => {
   const chatListRef = useRef(null);
-  const socket = io('http://localhost:4000');
+  const socket = io(import.meta.env.VITE_API_SOCKET);
   const [activeChat, setActiveChat] = useState(null);
   const [chatList, setChatList] = useState(chats);
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -99,7 +99,7 @@ const ChatList = ({ isOpen, toggleChatList, chats, userId1, userId2, token, requ
       const chatStartData = { userId1, userId2, token, requesterId };
 
       try {
-        const response = await fetch('http://localhost:4000/api/chat/start', {
+        const response = await fetch(`${import.meta.env.VITE_API_START_CHAT}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ const ChatList = ({ isOpen, toggleChatList, chats, userId1, userId2, token, requ
     }
 
     try {
-      const response = await fetch(`http://localhost:4000/api/chat/${chatId}/messages`);
+      const response = await fetch(`${import.meta.env.VITE_API_FETCH_MESSAGES}/${chatId}/messages`);
       const messages = await response.json();
       const userName = await fetchUserName(userId1 === requesterId ? userId2 : userId1);
       setActiveChat({ chatId, messages });

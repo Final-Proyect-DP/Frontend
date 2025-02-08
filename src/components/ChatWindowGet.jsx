@@ -19,7 +19,7 @@ const ChatWindowGet = ({ isOpen, toggleChatWindow, user, chatId, userId1, userId
 
   useEffect(() => {
     if (!socketRef.current) {
-      socketRef.current = io('http://localhost:4000', {
+      socketRef.current = io(import.meta.env.VITE_API_SOCKET, {
         query: { token }
       });
     }
@@ -36,7 +36,7 @@ const ChatWindowGet = ({ isOpen, toggleChatWindow, user, chatId, userId1, userId
 
       const fetchMessages = async (chatId) => {
         try {
-          const response = await fetch(`http://localhost:4000/api/chat/${chatId}/messages`, {
+          const response = await fetch(`${import.meta.env.VITE_API_FETCH_MESSAGES}/${chatId}/messages`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }

@@ -20,7 +20,7 @@ const ChatWindow = ({ isOpen, toggleChatWindow, user, userId2 }) => {
 
   useEffect(() => {
     if (!socketRef.current) {
-      socketRef.current = io('http://localhost:4000');
+      socketRef.current = io(import.meta.env.VITE_API_SOCKET);
     }
 
     const handleClickOutside = (event) => {
@@ -38,7 +38,7 @@ const ChatWindow = ({ isOpen, toggleChatWindow, user, userId2 }) => {
 
       console.log('Sending chat start data:', chatStartData); // Debug log
 
-      fetch('http://localhost:4000/api/chat/start', {
+      fetch(`${import.meta.env.VITE_API_START_CHAT}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,6 +61,8 @@ const ChatWindow = ({ isOpen, toggleChatWindow, user, userId2 }) => {
 
         fetchMessages(chatId);
 
+        // Remove previous event listener to avoid duplicates
+        socketRef.current.off('receive_message');
         socketRef.current.on('receive_message', (message) => {
           setMessages(prevMessages => [...prevMessages, message]);
           // Scroll to the bottom of the chat window
@@ -76,12 +78,15 @@ const ChatWindow = ({ isOpen, toggleChatWindow, user, userId2 }) => {
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      if (socketRef.current) {
+        socketRef.current.off('receive_message');
+      }
     };
   }, [isOpen, toggleChatWindow, userId1, userId2]);
 
   const fetchMessages = async (chatId) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/chat/${chatId}/messages`);
+      const response = await fetch(`${import.meta.env.VITE_API_FETCH_MESSAGES}/${chatId}/messages`);
       const data = await response.json();
       console.log('Messages fetched from API:', data); // Debug log
       setMessages(data);

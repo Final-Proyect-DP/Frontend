@@ -27,7 +27,7 @@ const FloatingButton = () => {
 
   useEffect(() => {
     if (!socketRef.current) {
-      socketRef.current = io('http://localhost:4000');
+      socketRef.current = io(import.meta.env.VITE_API_SOCKET);
     }
 
     const handleClickOutside = (event) => {
@@ -39,7 +39,7 @@ const FloatingButton = () => {
     const fetchChats = async () => {
       const userId = localStorage.getItem('userId');
       try {
-        const response = await fetch(`http://localhost:4000/api/chat/user/${userId}`);
+        const response = await fetch(`${import.meta.env.VITE_API_FETCH_CHATS}/${userId}`);
         const data = await response.json();
         console.log('Chats fetched from API:', data); // Debug log
         setChats(data);
