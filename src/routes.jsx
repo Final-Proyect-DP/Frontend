@@ -2,7 +2,8 @@ import { Home, Profile, SignIn, SignUp, Marketplace, PasswordRecovery, Iamodule 
 import { CreateProduct } from "@/pages/marketplace/create-product"; // Importar CreateProduct correctamente
 import { Chatbot } from "@/pages/iamodule/chatbot"; // Importar Chatbot correctamente
 import { Mapgen } from "@/pages/iamodule/mapgenerator"; // Importar Mapgen correctamente
-import {ProductDetail} from "@/pages/marketplace/ProductDetail"; // Importar ProductDetail correctamente
+import { ProductDetail } from "@/pages/marketplace/ProductDetail"; // Importar ProductDetail correctamente
+import { Sales } from "@/pages/marketplace/Sales"; // Importar Sales correctamente
 
 export const routes = [
   {
@@ -70,6 +71,12 @@ export const hiddenRoutes = [
     name: "Product Detail",
     path: "/marketplace/product-detail/:productId", // Correct path for ProductDetail
     element: <ProductDetail />,
+    protected: true,
+  },
+  {
+    name: "Sales",
+    path: "/marketplace/sales",
+    element: <Sales />,
     protected: true,
   }
 ];

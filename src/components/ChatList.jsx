@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import ChatWindowGet from './ChatWindowGet';
 
-const VITE_API_GET_USER = import.meta.env.VITE_API_GET_USER;
+const VITE_API_GET_USER = import.meta.env.VITE_API_GET_USER_BY_ID
+;
 
 const ChatList = ({ isOpen, toggleChatList, chats, userId1, userId2, token, requesterId }) => {
   const chatListRef = useRef(null);

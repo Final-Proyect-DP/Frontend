@@ -39,7 +39,7 @@ const Sidebar = () => {
             </a>
           </li>
           <li className="mb-4">
-            <a href="#" className="hover:text-gold">
+            <a href="#" className="hover:text-gold" onClick={() => navigate('/marketplace/sales')}>
               Venta
             </a>
           </li>
