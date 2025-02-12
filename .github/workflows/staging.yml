@@ -29,6 +29,7 @@ jobs:
           VITE_API_FETCH_PROFILE=${{ secrets.VITE_API_FETCH_PROFILE }}
           VITE_API_CHATBOT=${{ secrets.VITE_API_CHATBOT }}
           VITE_API_MAPGENERATOR=${{ secrets.VITE_API_MAPGENERATOR }}
+
           VITE_API_GET_PRODUCTS=${{ secrets.VITE_API_GET_PRODUCTS }}
           VITE_API_GET_PRODUCTS_BY_ID=${{ secrets.VITE_API_GET_PRODUCTS_BY_ID }}
           VITE_API_GET_CATEGORY=${{ secrets.VITE_API_GET_CATEGORY }}
@@ -87,14 +88,14 @@ jobs:
           timeout: "120s"
           script: |
             echo "Stopping existing container..."
-            docker stop frontend || true
-            docker rm frontend || true
+            sudo docker stop frontend || true
+            sudo docker rm frontend || true
 
             echo "Pulling latest image..."
-            docker pull byvoxel/frontend:staging
+            sudo docker pull byvoxel/frontend:staging
 
             echo "Running new container..."
-            docker run -d --name frontend -p 80:80 --restart unless-stopped byvoxel/frontend:staging
+            sudo docker run -d --name frontend -p 80:80 --restart unless-stopped byvoxel/frontend:staging
 
             echo "Cleaning up unused Docker resources..."
-            docker system prune -af --volumes || true
+            sudo docker system prune -af --volumes || true
