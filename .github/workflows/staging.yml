@@ -16,56 +16,36 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: edit .env file
-        env:
-          VITE_API_LOGIN: ${{ secrets.VITE_API_LOGIN }}
-          VITE_API_LOGOUT: ${{ secrets.VITE_API_LOGOUT }}
-          VITE_API_FORGOT_PASSWORD: ${{ secrets.VITE_API_FORGOT_PASSWORD }}
-          VITE_API_RESET_PASSWORD: ${{ secrets.VITE_API_RESET_PASSWORD }}
-          VITE_API_REGISTER: ${{ secrets.VITE_API_REGISTER }}
-          VITE_API_DELETE_PROFILE: ${{ secrets.VITE_API_DELETE_PROFILE }}
-          VITE_API_UPDATE_PROFILE: ${{ secrets.VITE_API_UPDATE_PROFILE }}
-          VITE_API_FETCH_PROFILE: ${{ secrets.VITE_API_FETCH_PROFILE }}
-          VITE_API_CHATBOT: ${{ secrets.VITE_API_CHATBOT }}
-          VITE_API_MAPGENERATOR: ${{ secrets.VITE_API_MAPGENERATOR }}
-          VITE_API_GET_PRODUCTS: ${{ secrets.VITE_API_GET_PRODUCTS }}
-          VITE_API_GET_PRODUCTS_BY_ID: ${{ secrets.VITE_API_GET_PRODUCTS_BY_ID }}
-          VITE_API_GET_CATEGORY: ${{ secrets.VITE_API_GET_CATEGORY }}
-          VITE_API_GET_CATEGORY_BY_ID: ${{ secrets.VITE_API_GET_CATEGORY_BY_ID }}
-          VITE_API_GET_USER: ${{ secrets.VITE_API_GET_USER }}
-          VITE_API_GET_USER_BY_ID: ${{ secrets.VITE_API_GET_USER_BY_ID }}
-          VITE_API_CREATE_PRODUCT: ${{ secrets.VITE_API_CREATE_PRODUCT }}
-          VITE_API_SOCKET: ${{ secrets.VITE_API_SOCKET }}
-          VITE_API_FETCH_CHATS: ${{ secrets.VITE_API_FETCH_CHATS }}
-          VITE_API_START_CHAT: ${{ secrets.VITE_API_START_CHAT }}
-          VITE_API_FETCH_MESSAGES: ${{ secrets.VITE_API_FETCH_MESSAGES }}
+      - name: Generate .env file
         run: |
-          echo "VITE_API_LOGIN=${VITE_API_LOGIN}" > .env
-          echo "VITE_API_LOGOUT=${VITE_API_LOGOUT}" >> .env
-          echo "VITE_API_FORGOT_PASSWORD=${VITE_API_FORGOT_PASSWORD}" >> .env
-          echo "VITE_API_RESET_PASSWORD=${VITE_API_RESET_PASSWORD}" >> .env
-          echo "VITE_API_REGISTER=${VITE_API_REGISTER}" >> .env
-          echo "VITE_API_DELETE_PROFILE=${VITE_API_DELETE_PROFILE}" >> .env
-          echo "VITE_API_UPDATE_PROFILE=${VITE_API_UPDATE_PROFILE}" >> .env
-          echo "VITE_API_FETCH_PROFILE=${VITE_API_FETCH_PROFILE}" >> .env
-          echo "VITE_API_CHATBOT=${VITE_API_CHATBOT}" >> .env
-          echo "VITE_API_MAPGENERATOR=${VITE_API_MAPGENERATOR}" >> .env
-          echo "VITE_API_GET_PRODUCTS=${VITE_API_GET_PRODUCTS}" >> .env
-          echo "VITE_API_GET_PRODUCTS_BY_ID=${VITE_API_GET_PRODUCTS_BY_ID}" >> .env
-          echo "VITE_API_GET_CATEGORY=${VITE_API_GET_CATEGORY}" >> .env
-          echo "VITE_API_GET_CATEGORY_BY_ID=${VITE_API_GET_CATEGORY_BY_ID}" >> .env
-          echo "VITE_API_GET_USER=${VITE_API_GET_USER}" >> .env
-          echo "VITE_API_GET_USER_BY_ID=${VITE_API_GET_USER_BY_ID}" >> .env
-          echo "VITE_API_CREATE_PRODUCT=${VITE_API_CREATE_PRODUCT}" >> .env
-          echo "VITE_API_SOCKET=${VITE_API_SOCKET}" >> .env
-          echo "VITE_API_FETCH_CHATS=${VITE_API_FETCH_CHATS}" >> .env
-          echo "VITE_API_START_CHAT=${VITE_API_START_CHAT}" >> .env
-          echo "VITE_API_FETCH_MESSAGES=${VITE_API_FETCH_MESSAGES}" >> .env
+          cat <<EOF > .env
+          VITE_API_LOGIN=${{ secrets.VITE_API_LOGIN }}
+          VITE_API_LOGOUT=${{ secrets.VITE_API_LOGOUT }}
+          VITE_API_FORGOT_PASSWORD=${{ secrets.VITE_API_FORGOT_PASSWORD }}
+          VITE_API_RESET_PASSWORD=${{ secrets.VITE_API_RESET_PASSWORD }}
+          VITE_API_REGISTER=${{ secrets.VITE_API_REGISTER }}
+          VITE_API_DELETE_PROFILE=${{ secrets.VITE_API_DELETE_PROFILE }}
+          VITE_API_UPDATE_PROFILE=${{ secrets.VITE_API_UPDATE_PROFILE }}
+          VITE_API_FETCH_PROFILE=${{ secrets.VITE_API_FETCH_PROFILE }}
+          VITE_API_CHATBOT=${{ secrets.VITE_API_CHATBOT }}
+          VITE_API_MAPGENERATOR=${{ secrets.VITE_API_MAPGENERATOR }}
+          VITE_API_GET_PRODUCTS=${{ secrets.VITE_API_GET_PRODUCTS }}
+          VITE_API_GET_PRODUCTS_BY_ID=${{ secrets.VITE_API_GET_PRODUCTS_BY_ID }}
+          VITE_API_GET_CATEGORY=${{ secrets.VITE_API_GET_CATEGORY }}
+          VITE_API_GET_CATEGORY_BY_ID=${{ secrets.VITE_API_GET_CATEGORY_BY_ID }}
+          VITE_API_GET_USER=${{ secrets.VITE_API_GET_USER }}
+          VITE_API_GET_USER_BY_ID=${{ secrets.VITE_API_GET_USER_BY_ID }}
+          VITE_API_CREATE_PRODUCT=${{ secrets.VITE_API_CREATE_PRODUCT }}
+          VITE_API_SOCKET=${{ secrets.VITE_API_SOCKET }}
+          VITE_API_FETCH_CHATS=${{ secrets.VITE_API_FETCH_CHATS }}
+          VITE_API_START_CHAT=${{ secrets.VITE_API_START_CHAT }}
+          VITE_API_FETCH_MESSAGES=${{ secrets.VITE_API_FETCH_MESSAGES }}
+          EOF
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Docker Hub pass-reset
+      - name: Docker Hub Login
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
@@ -76,37 +56,15 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: byvoxel/frontend
-          tags: |
-            type=raw,value=staging
-          
-      - name: Build and push Docker image
+          tags: type=raw,value=staging
+
+      - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           tags: byvoxel/frontend:staging
-          build-args: |
-            VITE_API_LOGIN=${{ secrets.VITE_API_LOGIN }}
-            VITE_API_LOGOUT=${{ secrets.VITE_API_LOGOUT }}
-            VITE_API_FORGOT_PASSWORD=${{ secrets.VITE_API_FORGOT_PASSWORD }}
-            VITE_API_RESET_PASSWORD=${{ secrets.VITE_API_RESET_PASSWORD }}
-            VITE_API_REGISTER=${{ secrets.VITE_API_REGISTER }}
-            VITE_API_DELETE_PROFILE=${{ secrets.VITE_API_DELETE_PROFILE }}
-            VITE_API_UPDATE_PROFILE=${{ secrets.VITE_API_UPDATE_PROFILE }}
-            VITE_API_FETCH_PROFILE=${{ secrets.VITE_API_FETCH_PROFILE }}
-            VITE_API_CHATBOT=${{ secrets.VITE_API_CHATBOT }}
-            VITE_API_MAPGENERATOR=${{ secrets.VITE_API_MAPGENERATOR }}
-            VITE_API_GET_PRODUCTS=${{ secrets.VITE_API_GET_PRODUCTS }}
-            VITE_API_GET_PRODUCTS_BY_ID=${{ secrets.VITE_API_GET_PRODUCTS_BY_ID }}
-            VITE_API_GET_CATEGORY=${{ secrets.VITE_API_GET_CATEGORY }}
-            VITE_API_GET_CATEGORY_BY_ID=${{ secrets.VITE_API_GET_CATEGORY_BY_ID }}
-            VITE_API_GET_USER=${{ secrets.VITE_API_GET_USER }}
-            VITE_API_GET_USER_BY_ID=${{ secrets.VITE_API_GET_USER_BY_ID }}
-            VITE_API_CREATE_PRODUCT=${{ secrets.VITE_API_CREATE_PRODUCT }}
-            VITE_API_SOCKET=${{ secrets.VITE_API_SOCKET }}
-            VITE_API_FETCH_CHATS=${{ secrets.VITE_API_FETCH_CHATS }}
-            VITE_API_START_CHAT=${{ secrets.VITE_API_START_CHAT }}
-            VITE_API_FETCH_MESSAGES=${{ secrets.VITE_API_FETCH_MESSAGES }}
+          build-args: $(cat .env | xargs)
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -129,14 +87,15 @@ jobs:
           port: 22
           timeout: "120s"
           script: |
-            set -e
-            echo "Deploying image: byvoxel/frontend:staging"
-            sudo docker stop frontend || true
-            sudo docker rm frontend || true
-            sudo docker pull byvoxel/frontend:staging
-            sudo docker run -d \
-              --name frontend \
-              -p 80:80 \
-              --restart unless-stopped \
-              byvoxel/frontend:staging
-            sudo docker system prune -af --volumes || true
+            echo "Stopping existing container..."
+            docker stop frontend || true
+            docker rm frontend || true
+
+            echo "Pulling latest image..."
+            docker pull byvoxel/frontend:staging
+
+            echo "Running new container..."
+            docker run -d --name frontend -p 80:80 --restart unless-stopped byvoxel/frontend:staging
+
+            echo "Cleaning up unused Docker resources..."
+            docker system prune -af --volumes || true
