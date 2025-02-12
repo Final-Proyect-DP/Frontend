@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../../components/Sidebar';
 import FloatingButton from '../../components/FloatingButton';
 
-const GET_USER_ITEMS_SERVER = 'http://127.0.0.1:8081/items/user';
-const UPDATE_PRODUCT_SERVER = 'http://127.0.0.1:5007/update_item'; // Updated URL
-const GET_CATEGORY_SERVER = 'http://127.0.0.1:5005/categories'; // Add category endpoint
-const DELETE_PRODUCT_SERVER = 'http://127.0.0.1:5008/products';
+const GET_USER_ITEMS_SERVER = import.meta.env.VITE_API_GET_USER_ITEMS;
+const UPDATE_PRODUCT_SERVER = import.meta.env.VITE_API_UPDATE_PRODUCT;
+const GET_CATEGORY_SERVER = import.meta.env.VITE_API_GET_CATEGORY;
+const DELETE_PRODUCT_SERVER = import.meta.env.VITE_API_DELETE_PRODUCT;
 
 const fetchUserItems = async (userId) => {
   try {
@@ -41,7 +41,7 @@ const fetchCategories = async () => {
 
 const updateProduct = async (id, updatedProduct) => {
   try {
-    const response = await fetch(`${UPDATE_PRODUCT_SERVER}/${id}`, { // Updated URL usage
+    const response = await fetch(`${UPDATE_PRODUCT_SERVER}/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
