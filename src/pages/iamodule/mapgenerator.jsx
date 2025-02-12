@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Input, Button, Typography, Card, CardBody } from "@material-tailwind/react";
+import { Input, Button, Typography, Card, CardBody, Select, Option } from "@material-tailwind/react";
 import { graphviz } from 'd3-graphviz'; // Importar Graphviz
 
 const Mapgen = () => {
   const [theme, setTheme] = useState(""); // State for theme
-  const [considerations, setConsiderations] = useState(""); // State for considerations
+  const [considerations, setConsiderations] = useState("be concise"); // State for considerations
   const [mapCode, setMapCode] = useState(""); // State for the Graphviz code
   const graphvizContainerRef = useRef(null); // Ref for the Graphviz container
 
@@ -106,19 +106,21 @@ const Mapgen = () => {
               className="flex-grow mr-4"
               style={{ marginRight: '1rem' }}
             />
-            <Input
-              type="text"
-              placeholder="Map considerations..."
+            <Select
               value={considerations}
-              onChange={(e) => setConsiderations(e.target.value)}
+              onChange={(value) => setConsiderations(value)}
               className="flex-grow"
-            />
+            >
+              <Option value="be concise">Be Concise</Option>
+              <Option value="be creative">Be Creative</Option>
+              <Option value="be simple">Be Simple</Option>
+              <Option value="structured visualizing">Structured Visualizing</Option>
+              <Option value="be clear">Be Clear</Option>
+            </Select>
           </div>
           <div className="flex mb-4">
             <Button onClick={handleSendMessage} className="mr-4">Send</Button>
             <Button onClick={handleExportImage} className="mr-4">Export</Button>
-            {/* <Button onClick={() => handleZoom(true)} className="mr-2">Zoom In</Button>
-            <Button onClick={() => handleZoom(false)}>Zoom Out</Button> */}
           </div>
           <div id="graphviz-container" ref={graphvizContainerRef} className="flex-1 overflow-auto w-full h-full"></div>
         </CardBody>

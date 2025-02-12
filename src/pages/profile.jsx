@@ -17,7 +17,6 @@ export function Profile() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    email: "",
     address: "",
     career: "",
     semester: "",
@@ -46,7 +45,6 @@ export function Profile() {
           setFormData({
             firstName: data.firstName,
             lastName: data.lastName,
-            email: data.email,
             address: data.address,
             career: data.career,
             semester: data.semester,
@@ -78,8 +76,6 @@ export function Profile() {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.username) newErrors.username = "Username is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    else if (!validateEmail(formData.email)) newErrors.email = "Invalid email format";
     if (!formData.firstName) newErrors.firstName = "First Name is required";
     if (!formData.lastName) newErrors.lastName = "Last Name is required";
     if (!formData.address) newErrors.address = "Address is required";
@@ -129,7 +125,6 @@ export function Profile() {
     if (userId && token) {
       const payload = {
         username: formData.username,
-        email: formData.email,
         firstName: formData.firstName,
         lastName: formData.lastName,
         address: formData.address,
@@ -291,8 +286,6 @@ export function Profile() {
             {errors.firstName && <Typography variant="small" color="red">{errors.firstName}</Typography>}
             <Input label="Last Name" name="lastName" value={formData.lastName} onChange={handleInputChange} error={!!errors.lastName} />
             {errors.lastName && <Typography variant="small" color="red">{errors.lastName}</Typography>}
-            <Input label="Email" name="email" value={formData.email} onChange={handleInputChange} error={!!errors.email} />
-            {errors.email && <Typography variant="small" color="red">{errors.email}</Typography>}
             <Input label="Address" name="address" value={formData.address} onChange={handleInputChange} error={!!errors.address} />
             {errors.address && <Typography variant="small" color="red">{errors.address}</Typography>}
             <Select
