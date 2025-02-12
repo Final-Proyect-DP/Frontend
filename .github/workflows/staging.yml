@@ -29,8 +29,16 @@ jobs:
           VITE_API_CHATBOT: ${{ secrets.VITE_API_CHATBOT }}
           VITE_API_MAPGENERATOR: ${{ secrets.VITE_API_MAPGENERATOR }}
           VITE_API_GET_PRODUCTS: ${{ secrets.VITE_API_GET_PRODUCTS }}
+          VITE_API_GET_PRODUCTS_BY_ID: ${{ secrets.VITE_API_GET_PRODUCTS_BY_ID }}
           VITE_API_GET_CATEGORY: ${{ secrets.VITE_API_GET_CATEGORY }}
+          VITE_API_GET_CATEGORY_BY_ID: ${{ secrets.VITE_API_GET_CATEGORY_BY_ID }}
           VITE_API_GET_USER: ${{ secrets.VITE_API_GET_USER }}
+          VITE_API_GET_USER_BY_ID: ${{ secrets.VITE_API_GET_USER_BY_ID }}
+          VITE_API_CREATE_PRODUCT: ${{ secrets.VITE_API_CREATE_PRODUCT }}
+          VITE_API_SOCKET: ${{ secrets.VITE_API_SOCKET }}
+          VITE_API_FETCH_CHATS: ${{ secrets.VITE_API_FETCH_CHATS }}
+          VITE_API_START_CHAT: ${{ secrets.VITE_API_START_CHAT }}
+          VITE_API_FETCH_MESSAGES: ${{ secrets.VITE_API_FETCH_MESSAGES }}
         run: |
           echo "VITE_API_LOGIN=${VITE_API_LOGIN}" > .env
           echo "VITE_API_LOGOUT=${VITE_API_LOGOUT}" >> .env
@@ -43,8 +51,16 @@ jobs:
           echo "VITE_API_CHATBOT=${VITE_API_CHATBOT}" >> .env
           echo "VITE_API_MAPGENERATOR=${VITE_API_MAPGENERATOR}" >> .env
           echo "VITE_API_GET_PRODUCTS=${VITE_API_GET_PRODUCTS}" >> .env
+          echo "VITE_API_GET_PRODUCTS_BY_ID=${VITE_API_GET_PRODUCTS_BY_ID}" >> .env
           echo "VITE_API_GET_CATEGORY=${VITE_API_GET_CATEGORY}" >> .env
+          echo "VITE_API_GET_CATEGORY_BY_ID=${VITE_API_GET_CATEGORY_BY_ID}" >> .env
           echo "VITE_API_GET_USER=${VITE_API_GET_USER}" >> .env
+          echo "VITE_API_GET_USER_BY_ID=${VITE_API_GET_USER_BY_ID}" >> .env
+          echo "VITE_API_CREATE_PRODUCT=${VITE_API_CREATE_PRODUCT}" >> .env
+          echo "VITE_API_SOCKET=${VITE_API_SOCKET}" >> .env
+          echo "VITE_API_FETCH_CHATS=${VITE_API_FETCH_CHATS}" >> .env
+          echo "VITE_API_START_CHAT=${VITE_API_START_CHAT}" >> .env
+          echo "VITE_API_FETCH_MESSAGES=${VITE_API_FETCH_MESSAGES}" >> .env
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -81,8 +97,16 @@ jobs:
             VITE_API_CHATBOT=${{ secrets.VITE_API_CHATBOT }}
             VITE_API_MAPGENERATOR=${{ secrets.VITE_API_MAPGENERATOR }}
             VITE_API_GET_PRODUCTS=${{ secrets.VITE_API_GET_PRODUCTS }}
+            VITE_API_GET_PRODUCTS_BY_ID=${{ secrets.VITE_API_GET_PRODUCTS_BY_ID }}
             VITE_API_GET_CATEGORY=${{ secrets.VITE_API_GET_CATEGORY }}
+            VITE_API_GET_CATEGORY_BY_ID=${{ secrets.VITE_API_GET_CATEGORY_BY_ID }}
             VITE_API_GET_USER=${{ secrets.VITE_API_GET_USER }}
+            VITE_API_GET_USER_BY_ID=${{ secrets.VITE_API_GET_USER_BY_ID }}
+            VITE_API_CREATE_PRODUCT=${{ secrets.VITE_API_CREATE_PRODUCT }}
+            VITE_API_SOCKET=${{ secrets.VITE_API_SOCKET }}
+            VITE_API_FETCH_CHATS=${{ secrets.VITE_API_FETCH_CHATS }}
+            VITE_API_START_CHAT=${{ secrets.VITE_API_START_CHAT }}
+            VITE_API_FETCH_MESSAGES=${{ secrets.VITE_API_FETCH_MESSAGES }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -93,7 +117,7 @@ jobs:
     strategy:
       matrix:
         ec2_instance: 
-          - ec2-54-208-137-77.compute-1.amazonaws.com
+          - ec2-52-90-187-98.compute-1.amazonaws.com
 
     steps:
       - name: Deploy Container
