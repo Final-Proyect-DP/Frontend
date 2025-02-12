@@ -1,9 +1,38 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 
-const Sidebar = () => {
+const debounce = (callback, wait) => {
+  let timerId;
+  return (...args) => {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => {
+      callback(...args);
+    }, wait);
+  };
+};
+
+const Sidebar = ({ onSearch }) => {
+  const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
+
+  const debouncedSearch = useCallback(debounce((term) => {
+    onSearch(term);
+  }, 300), [onSearch]);
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSearchClick = () => {
+    debouncedSearch(inputValue);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      debouncedSearch(inputValue);
+    }
+  };
 
   return (
     <aside className="w-full lg:w-64 bg-gray-800 p-4 text-white lg:block hidden">
@@ -13,8 +42,14 @@ const Sidebar = () => {
           type="text"
           placeholder="Buscar en Marketplace"
           className="w-full p-2 pl-10 rounded-full bg-gray-700 text-white focus:outline-none"
+          value={inputValue}
+          onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
         />
-        <MagnifyingGlassIcon className="absolute left-3 top-2.5 h-5 w-5 text-white" />
+        <MagnifyingGlassIcon
+          className="absolute left-3 top-2.5 h-5 w-5 text-white cursor-pointer"
+          onClick={handleSearchClick}
+        />
       </div>
       <nav>
         <ul>

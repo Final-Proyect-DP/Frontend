@@ -8,7 +8,7 @@ import io from 'socket.io-client';
 const GET_PRODUCT_BY_ID_SERVER = import.meta.env.VITE_API_GET_PRODUCTS_BY_ID;
 const GET_CATEGORY_SERVER = import.meta.env.VITE_API_GET_CATEGORY_BY_ID;
 const GET_USER_SERVER = import.meta.env.VITE_API_GET_USER_BY_ID;
-
+const SOCKET_SERVER = import.meta.env.VITE_API_SOCKET;
 
 const fetchProductDetails = async (id) => {
   try {
@@ -79,7 +79,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     if (!socketRef.current) {
-      socketRef.current = io('http://localhost:4000');
+      socketRef.current = io(SOCKET_SERVER);
     }
 
     return () => {
