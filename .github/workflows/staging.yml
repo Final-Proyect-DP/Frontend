@@ -33,7 +33,6 @@ jobs:
           VITE_API_GET_PRODUCTS_BY_ID=${{ secrets.VITE_API_GET_PRODUCTS_BY_ID }}
           VITE_API_GET_CATEGORY=${{ secrets.VITE_API_GET_CATEGORY }}
           VITE_API_GET_CATEGORY_BY_ID=${{ secrets.VITE_API_GET_CATEGORY_BY_ID }}
-          VITE_API_GET_USER=${{ secrets.VITE_API_GET_USER }}
           VITE_API_GET_USER_BY_ID=${{ secrets.VITE_API_GET_USER_BY_ID }}
           VITE_API_CREATE_PRODUCT=${{ secrets.VITE_API_CREATE_PRODUCT }}
           VITE_API_SOCKET=${{ secrets.VITE_API_SOCKET }}
