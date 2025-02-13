@@ -46,6 +46,25 @@ const Iamodule = () => {
             </span>
           </button>
         </aside>
+        <aside className="w-full lg:w-64 bg-black p-4 text-white lg:hidden block">
+          <h1 className="text-2xl font-bold mb-6">AI Module</h1>
+          <button
+            className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-white-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 w-full h-12"
+            onClick={() => setActiveComponent("chatbot")}
+          >
+            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-black dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 w-full text-center">
+              ChatBot
+            </span>
+          </button>
+          <button
+            className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-white-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800 w-full h-12"
+            onClick={() => setActiveComponent("mapgenerator")}
+          >
+            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-black dark:bg-gray-900 rounded-md group-hover:bg-opacity-0 w-full text-center">
+              Conceptual Map Generator
+            </span>
+          </button>
+        </aside>
 
         {/* Main content */}
         <main className="flex-1 p-6 bg-white bg-opacity-75 flex flex-col overflow-hidden">

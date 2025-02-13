@@ -21,17 +21,17 @@ export function Home() {
       <div className="relative flex h-screen content-center items-center justify-center pt-16 pb-32">
         <div className="absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center" />
         <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
-        <div className="max-w-8xl container relative mx-auto">
+        <div className="max-w-8xl container relative mx-auto px-4">
           <div className="flex flex-wrap items-center">
             <div className="ml-auto mr-auto w-full px-4 text-center lg:w-8/12">
               <Typography
                 variant="h1"
                 color="white"
-                className="mb-6 font-black"
+                className="mb-6 font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
               >
                 Our Proyect.
               </Typography>
-              <Typography variant="lead" color="white" className="opacity-70">
+              <Typography variant="lead" color="white" className="opacity-70 text-sm sm:text-base md:text-lg lg:text-xl">
                 The educational platform, developed for a Distributed Programming
                 course, consists of 20 AWS-deployed microservices using REST API, GraphQL,
                 WebSocket, WebHook, and RPC. It integrates four types of databases, runs on
@@ -67,12 +67,12 @@ export function Home() {
               </div>
               <Typography
                 variant="h3"
-                className="mb-3 font-bold"
+                className="mb-3 font-bold text-2xl sm:text-3xl"
                 color="blue-gray"
               >
                 The architecture
               </Typography>
-              <Typography className="mb-8 font-normal text-blue-gray-500">
+              <Typography className="mb-8 font-normal text-blue-gray-500 text-sm sm:text-base">
                 Our application uses cloud infrastructure, deploying containers across multiple
                 regions and availability zones for resilience. Each microservice has its own database,
                 ensuring high availability, scalability, and fault isolation.
@@ -96,11 +96,11 @@ export function Home() {
                   <Typography
                     variant="h5"
                     color="blue-gray"
-                    className="mb-3 mt-2 font-bold"
+                    className="mb-3 mt-2 font-bold text-xl"
                   >
                     AWS Architecture
                   </Typography>
-                  <Typography className="font-normal text-blue-gray-500">
+                  <Typography className="font-normal text-blue-gray-500 text-sm sm:text-base">
                     We use AWS for its reliable, scalable, and secure infrastructure,
                     enabling resilient deployment, independent scaling, and integrated
                     security with minimal downtime.
@@ -162,7 +162,7 @@ export function Home() {
                 <Typography variant="h5" color="blue-gray" className="mb-2">
                   {title}
                 </Typography>
-                <Typography className="font-normal text-blue-gray-500">
+                <Typography className="font-normal text-blue-gray-500 text-sm sm:text-base">
                   {description}
                 </Typography>
               </Card>
@@ -172,7 +172,7 @@ export function Home() {
             Complete this form and we will get back to you in 24 hours.
           </PageTitle>
           <form className="mx-auto w-full mt-12 lg:w-5/12">
-            <div className="mb-8 flex gap-8">
+            <div className="mb-8 flex flex-col gap-8 md:flex-row">
               <Input variant="outlined" size="lg" label="Full Name" />
               <Input variant="outlined" size="lg" label="Email Address" />
             </div>

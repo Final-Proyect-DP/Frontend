@@ -110,9 +110,6 @@ export function Navbar({ brandName, routes }) {
             target="_blank"
             className="mb-2 block"
           >
-            <Button variant="text" size="sm" fullWidth>
-              pro version
-            </Button>
           </a>
           {isAuthenticated && (
             <Button
