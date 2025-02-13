@@ -20,16 +20,16 @@ jobs:
 
       - name: edit .env file
         env:
-          VITE_API_LOGIN: ${{ secrets.VITE_API_LOGIN }}
-          VITE_API_LOGOUT: ${{ secrets.VITE_API_LOGOUT }}
-          VITE_API_FORGOT_PASSWORD: ${{ secrets.VITE_API_FORGOT_PASSWORD }}
-          VITE_API_RESET_PASSWORD: ${{ secrets.VITE_API_RESET_PASSWORD }}
-          VITE_API_REGISTER: ${{ secrets.VITE_API_REGISTER }}
-          VITE_API_DELETE_PROFILE: ${{ secrets.VITE_API_DELETE_PROFILE }}
-          VITE_API_UPDATE_PROFILE: ${{ secrets.VITE_API_UPDATE_PROFILE }}
-          VITE_API_FETCH_PROFILE: ${{ secrets.VITE_API_FETCH_PROFILE }}
-          VITE_API_CHATBOT: ${{ secrets.VITE_API_CHATBOT }}
-          VITE_API_MAPGENERATOR: ${{ secrets.VITE_API_MAPGENERATOR }}
+          VITE_API_LOGIN: ${{ secrets.VITE_API_LOGIN_PROD }}
+          VITE_API_LOGOUT: ${{ secrets.VITE_API_LOGOUT_PROD }}
+          VITE_API_FORGOT_PASSWORD: ${{ secrets.VITE_API_FORGOT_PASSWORD_PROD }}
+          VITE_API_RESET_PASSWORD: ${{ secrets.VITE_API_RESET_PASSWORD_PROD }}
+          VITE_API_REGISTER: ${{ secrets.VITE_API_REGISTER_PROD }}
+          VITE_API_DELETE_PROFILE: ${{ secrets.VITE_API_DELETE_PROFILE_PROD }}
+          VITE_API_UPDATE_PROFILE: ${{ secrets.VITE_API_UPDATE_PROFILE_PROD }}
+          VITE_API_FETCH_PROFILE: ${{ secrets.VITE_API_FETCH_PROFILE_PROD }}
+          VITE_API_CHATBOT: ${{ secrets.VITE_API_CHATBOT_PROD }}
+          VITE_API_MAPGENERATOR: ${{ secrets.VITE_API_MAPGENERATOR_PROD }}
           VITE_API_GET_PRODUCTS: ${{ secrets.VITE_API_GET_PRODUCTS }}
           VITE_API_GET_PRODUCTS_BY_ID: ${{ secrets.VITE_API_GET_PRODUCTS_BY_ID }}
           VITE_API_GET_CATEGORY: ${{ secrets.VITE_API_GET_CATEGORY }}
@@ -86,16 +86,16 @@ jobs:
           push: true
           tags: byvoxel/frontend:production
           build-args: |
-            VITE_API_LOGIN=${{ secrets.VITE_API_LOGIN }}
-            VITE_API_LOGOUT=${{ secrets.VITE_API_LOGOUT }}
-            VITE_API_FORGOT_PASSWORD=${{ secrets.VITE_API_FORGOT_PASSWORD }}
-            VITE_API_RESET_PASSWORD=${{ secrets.VITE_API_RESET_PASSWORD }}
-            VITE_API_REGISTER=${{ secrets.VITE_API_REGISTER }}
-            VITE_API_DELETE_PROFILE=${{ secrets.VITE_API_DELETE_PROFILE }}
-            VITE_API_UPDATE_PROFILE=${{ secrets.VITE_API_UPDATE_PROFILE }}
-            VITE_API_FETCH_PROFILE=${{ secrets.VITE_API_FETCH_PROFILE }}
-            VITE_API_CHATBOT=${{ secrets.VITE_API_CHATBOT }}
-            VITE_API_MAPGENERATOR=${{ secrets.VITE_API_MAPGENERATOR }}
+            VITE_API_LOGIN=${{ secrets.VITE_API_LOGIN_PROD }}
+            VITE_API_LOGOUT=${{ secrets.VITE_API_LOGOUT_PROD }}
+            VITE_API_FORGOT_PASSWORD=${{ secrets.VITE_API_FORGOT_PASSWORD_PROD }}
+            VITE_API_RESET_PASSWORD=${{ secrets.VITE_API_RESET_PASSWORD_PROD }}
+            VITE_API_REGISTER=${{ secrets.VITE_API_REGISTER_PROD }}
+            VITE_API_DELETE_PROFILE=${{ secrets.VITE_API_DELETE_PROFILE_PROD }}
+            VITE_API_UPDATE_PROFILE=${{ secrets.VITE_API_UPDATE_PROFILE_PROD }}
+            VITE_API_FETCH_PROFILE=${{ secrets.VITE_API_FETCH_PROFILE_PROD }}
+            VITE_API_CHATBOT=${{ secrets.VITE_API_CHATBOT_PROD }}
+            VITE_API_MAPGENERATOR=${{ secrets.VITE_API_MAPGENERATOR_PROD }}
             VITE_API_GET_PRODUCTS=${{ secrets.VITE_API_GET_PRODUCTS }}
             VITE_API_GET_PRODUCTS_BY_ID=${{ secrets.VITE_API_GET_PRODUCTS_BY_ID }}
             VITE_API_GET_CATEGORY=${{ secrets.VITE_API_GET_CATEGORY }}
