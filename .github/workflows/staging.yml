@@ -1,4 +1,4 @@
-name: Deploy Pull Request to main Environment
+name: Push to QA Environment
 
 on:
   push:
@@ -114,7 +114,7 @@ jobs:
     strategy:
       matrix:
         ec2_instance: 
-          - ec2-3-86-160-77.compute-1.amazonaws.com
+          - ec2-52-91-70-97.compute-1.amazonaws.com
 
     steps:
       - name: Deploy Container
