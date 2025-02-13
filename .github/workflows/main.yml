@@ -1,11 +1,13 @@
-name: Deploy Pull Request to main Environment
+name: Deploy on Production environment
 
 on:
-  push:
-    branches: [staging]
+  pull_request:
+    types: [closed]
+    branches: [main]
 
 jobs:
   build_docker_image:
+    if: github.event.pull_request.merged == true 
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
 
@@ -75,14 +77,14 @@ jobs:
         with:
           images: byvoxel/frontend
           tags: |
-            type=raw,value=staging
+            type=raw,value=production
           
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: byvoxel/frontend:staging
+          tags: byvoxel/frontend:production
           build-args: |
             VITE_API_LOGIN=${{ secrets.VITE_API_LOGIN }}
             VITE_API_LOGOUT=${{ secrets.VITE_API_LOGOUT }}
@@ -114,7 +116,7 @@ jobs:
     strategy:
       matrix:
         ec2_instance: 
-          - ec2-3-86-160-77.compute-1.amazonaws.com
+          - ec2-3-83-115-139.compute-1.amazonaws.com
 
     steps:
       - name: Deploy Container
@@ -127,13 +129,13 @@ jobs:
           timeout: "120s"
           script: |
             set -e
-            echo "Deploying image: byvoxel/frontend:staging"
+            echo "Deploying image: byvoxel/frontend:production"
             sudo docker stop frontend || true
             sudo docker rm frontend || true
-            sudo docker pull byvoxel/frontend:staging
+            sudo docker pull byvoxel/frontend:production
             sudo docker run -d \
               --name frontend \
               -p 80:80 \
               --restart unless-stopped \
-              byvoxel/frontend:staging
+              byvoxel/frontend:production
             sudo docker system prune -af --volumes || true
