@@ -93,18 +93,17 @@ const Mapgen = () => {
   };
 
   return (
-    <section className="flex-1 flex flex-col">
-      <Typography variant="h2" className="font-bold mb-4">Map Generator</Typography>
+    <section className="flex-1 flex flex-col p-4 sm:p-6 md:p-8">
+      <Typography variant="h2" className="font-bold mb-4 text-center sm:text-left">Map Generator</Typography>
       <Card className="flex-1 p-4 shadow-lg flex flex-col">
         <CardBody className="flex-1 flex flex-col">
-          <div className="flex mb-4">
+          <div className="flex flex-col sm:flex-row mb-4">
             <Input
               type="text"
               placeholder="Map theme..."
               value={theme}
               onChange={(e) => setTheme(e.target.value)}
-              className="flex-grow mr-4"
-              style={{ marginRight: '1rem' }}
+              className="flex-grow mb-4 sm:mb-0 sm:mr-4"
             />
             <Select
               value={considerations}
@@ -118,9 +117,9 @@ const Mapgen = () => {
               <Option value="be clear">Be Clear</Option>
             </Select>
           </div>
-          <div className="flex mb-4">
-            <Button onClick={handleSendMessage} className="mr-4">Send</Button>
-            <Button onClick={handleExportImage} className="mr-4">Export</Button>
+          <div className="flex flex-col sm:flex-row mb-4">
+            <Button onClick={handleSendMessage} className="mb-4 sm:mb-0 sm:mr-4">Send</Button>
+            <Button onClick={handleExportImage} className="mb-4 sm:mb-0 sm:mr-4">Export</Button>
           </div>
           <div id="graphviz-container" ref={graphvizContainerRef} className="flex-1 overflow-auto w-full h-full"></div>
         </CardBody>

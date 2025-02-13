@@ -48,8 +48,8 @@ const Chatbot = () => {
   };
 
   return (
-    <section className="flex-1 flex flex-col h-[calc(100vh-120px)]">
-      <Typography variant="h2" className="font-bold mb-4">ChatBot</Typography>
+    <section className="flex-1 flex flex-col p-4 sm:p-6 md:p-8 h-[calc(100vh-120px)]">
+      <Typography variant="h2" className="font-bold mb-4 text-center sm:text-left">ChatBot</Typography>
       <Card className="flex-1 p-4 shadow-lg flex flex-col">
         <CardBody className="flex-1 flex flex-col h-full">
           <div 
