@@ -6,7 +6,7 @@ import routes, { hiddenRoutes } from "@/routes";
 function App() {
   const { pathname } = useLocation();
   const { isAuthenticated } = useAuth(); // Obtén el estado de autenticación
-
+//
   return (
     <>
       {!(pathname === '/sign-in' || pathname === '/sign-up' || pathname === '/password-recovery') && (
