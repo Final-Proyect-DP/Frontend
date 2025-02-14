@@ -174,7 +174,7 @@ export function Home() {
             Here is an overview of our entire production architecture.
           </PageTitle>
           <div className="mt-12 flex justify-center">
-            <img src="/img/Main Enviroment.png" alt="Architecture Overview" className="w-full h-auto max-w-4xl" />
+            <img src="/img/Main Enviroment.jpg" alt="Architecture Overview" className="w-full h-auto max-w-4xl" />
           </div>
         </div>
       </section>
@@ -184,7 +184,7 @@ export function Home() {
             Here is an overview of our QA entire architecture.
           </PageTitle>
           <div className="mt-12 flex justify-center">
-            <img src="/img/qa enviroment.png" alt="Architecture Overview" className="w-full h-auto max-w-4xl" />
+            <img src="/img/qa enviroment.jpg" alt="Architecture Overview" className="w-full h-auto max-w-4xl" />
           </div>
         </div>
       </section>
