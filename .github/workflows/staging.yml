@@ -38,6 +38,10 @@ jobs:
           VITE_API_FETCH_CHATS: ${{ secrets.VITE_API_FETCH_CHATS }}
           VITE_API_START_CHAT: ${{ secrets.VITE_API_START_CHAT }}
           VITE_API_FETCH_MESSAGES: ${{ secrets.VITE_API_FETCH_MESSAGES }}
+          VITE_API_GET_USER_ITEMS: ${{ secrets.VITE_API_GET_USER_ITEMS }}
+          VITE_API_UPDATE_PRODUCT: ${{ secrets.VITE_API_UPDATE_PRODUCT }}
+          VITE_API_DELETE_PRODUCT: ${{ secrets.VITE_API_DELETE_PRODUCT }}
+          
         run: |
           echo "VITE_API_LOGIN=${VITE_API_LOGIN}" > .env
           echo "VITE_API_LOGOUT=${VITE_API_LOGOUT}" >> .env
@@ -59,6 +63,9 @@ jobs:
           echo "VITE_API_FETCH_CHATS=${VITE_API_FETCH_CHATS}" >> .env
           echo "VITE_API_START_CHAT=${VITE_API_START_CHAT}" >> .env
           echo "VITE_API_FETCH_MESSAGES=${VITE_API_FETCH_MESSAGES}" >> .env
+          echo "VITE_API_GET_USER_ITEMS=${VITE_API_GET_USER_ITEMS}" >> .env
+          echo "VITE_API_UPDATE_PRODUCT=${VITE_API_UPDATE_PRODUCT}" >> .env
+          echo "VITE_API_DELETE_PRODUCT=${VITE_API_DELETE_PRODUCT}" >> .env
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -139,4 +146,4 @@ jobs:
               -p 80:80 \
               --restart unless-stopped \
               byvoxel/frontend:staging
-            sudo docker system prune -af --volumes || true 
+            sudo docker system prune -af --volumes || true
