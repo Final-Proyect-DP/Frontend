@@ -14,11 +14,15 @@ const fetchUserItems = async (userId) => {
         'accept': 'application/json'
       }
     });
-    if (!response.ok) {
-      throw new Error('Failed to fetch user items');
+    const text = await response.text();
+    try {
+      const data = JSON.parse(text);
+      return data.products; // Update to match the response structure
+    } catch (error) {
+      console.error('Error parsing JSON:', error);
+      console.error('Response text:', text);
+      throw new Error('Failed to parse JSON response');
     }
-    const data = await response.json();
-    return data.products; // Update to match the response structure
   } catch (error) {
     console.error('Error fetching user items:', error);
     throw error;
