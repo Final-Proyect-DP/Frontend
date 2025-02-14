@@ -157,7 +157,7 @@ export function Home() {
               pagination={{ clickable: true }}
               modules={[Navigation, Pagination]}
             >
-              {['public/img/WhatsApp Image 2025-02-13 at 6.35.51 PM.jpeg', 'public/img/WhatsApp Image 2025-02-13 at 6.36.02 PM.jpeg', 'public/img/WhatsApp Image 2025-02-13 at 6.36.12 PM.jpeg','public/img/WhatsApp Image 2025-02-13 at 6.36.21 PM.jpeg','public/img/WhatsApp Image 2025-02-13 at 6.36.29 PM.jpeg','public/img/WhatsApp Image 2025-02-13 at 6.36.38 PM.jpeg','public/img/WhatsApp Image 2025-02-13 at 6.36.47 PM.jpeg','public/img/WhatsApp Image 2025-02-13 at 6.36.57 PM.jpeg'].map((src, index) => (
+              {['/img/WhatsApp Image 2025-02-13 at 6.35.51 PM.jpeg', '/img/WhatsApp Image 2025-02-13 at 6.36.02 PM.jpeg', '/img/WhatsApp Image 2025-02-13 at 6.36.12 PM.jpeg','/img/WhatsApp Image 2025-02-13 at 6.36.21 PM.jpeg','/img/WhatsApp Image 2025-02-13 at 6.36.29 PM.jpeg','/img/WhatsApp Image 2025-02-13 at 6.36.38 PM.jpeg','/img/WhatsApp Image 2025-02-13 at 6.36.47 PM.jpeg','/img/WhatsApp Image 2025-02-13 at 6.36.57 PM.jpeg'].map((src, index) => (
                 <SwiperSlide key={index}>
                   <div className="flex justify-center items-center h-75">
                     <img src={src} alt={`Architecture ${index + 1}`} className="object-contain h-full" />
@@ -174,7 +174,7 @@ export function Home() {
             Here is an overview of our entire production architecture.
           </PageTitle>
           <div className="mt-12 flex justify-center">
-            <img src="public/img/Main Enviroment.png" alt="Architecture Overview" className="w-full h-auto max-w-4xl" />
+            <img src="/img/Main Enviroment.png" alt="Architecture Overview" className="w-full h-auto max-w-4xl" />
           </div>
         </div>
       </section> <section className="px-4 pt-10 pb-10 bg-gray-100">
@@ -183,7 +183,7 @@ export function Home() {
             Here is an overview of our QA entire architecture.
           </PageTitle>
           <div className="mt-12 flex justify-center">
-            <img src="public/img/qa enviroment.png" alt="Architecture Overview" className="w-full h-auto max-w-4xl" />
+            <img src="/img/qaenviroment.png" alt="Architecture Overview" className="w-full h-auto max-w-4xl" />
           </div>
         </div>
       </section>
