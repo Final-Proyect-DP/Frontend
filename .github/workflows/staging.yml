@@ -97,13 +97,16 @@ jobs:
             VITE_API_GET_PRODUCTS=${{ secrets.VITE_API_GET_PRODUCTS }}
             VITE_API_GET_PRODUCTS_BY_ID=${{ secrets.VITE_API_GET_PRODUCTS_BY_ID }}
             VITE_API_GET_CATEGORY=${{ secrets.VITE_API_GET_CATEGORY }}
-            VITE_API_GET_CATEGORY_BY_ID=${{ secrets.VITE_API_GET_CATEGORY_BY_ID }}            
+            VITE_API_GET_CATEGORY_BY_ID=${{ secrets.VITE_API_GET_CATEGORY_BY_ID }}
             VITE_API_GET_USER_BY_ID=${{ secrets.VITE_API_GET_USER_BY_ID }}
             VITE_API_CREATE_PRODUCT=${{ secrets.VITE_API_CREATE_PRODUCT }}
             VITE_API_SOCKET=${{ secrets.VITE_API_SOCKET }}
             VITE_API_FETCH_CHATS=${{ secrets.VITE_API_FETCH_CHATS }}
             VITE_API_START_CHAT=${{ secrets.VITE_API_START_CHAT }}
             VITE_API_FETCH_MESSAGES=${{ secrets.VITE_API_FETCH_MESSAGES }}
+            VITE_API_GET_USER_ITEMS=${{ secrets.VITE_API_GET_USER_ITEMS }}
+            VITE_API_UPDATE_PRODUCT=${{ secrets.VITE_API_UPDATE_PRODUCT }}
+            VITE_API_DELETE_PRODUCT=${{ secrets.VITE_API_DELETE_PRODUCT }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
