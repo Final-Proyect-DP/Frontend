@@ -15,6 +15,15 @@ export function Navbar({ brandName, routes }) {
   const [openNav, setOpenNav] = React.useState(false);
   const { isAuthenticated, logout } = useAuth(); // Obtener el estado de autenticación y logout
 
+  const handleItemClick = (event, href, path) => {
+    event.preventDefault();
+    if (href) {
+      window.location.href = href;
+    } else if (path) {
+      window.location.pathname = path;
+    }
+  };
+
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -38,6 +47,7 @@ export function Navbar({ brandName, routes }) {
                 href={href}
                 target={target}
                 className="flex items-center gap-1 p-1 font-bold"
+                onClick={(event) => handleItemClick(event, href)} // Navegar a la página al hacer clic
               >
                 {icon &&
                   React.createElement(icon, {
@@ -50,6 +60,7 @@ export function Navbar({ brandName, routes }) {
                 to={path}
                 target={target}
                 className="flex items-center gap-1 p-1 font-bold"
+                onClick={(event) => handleItemClick(event, null, path)} // Navegar a la página al hacer clic
               >
                 {icon &&
                   React.createElement(icon, {

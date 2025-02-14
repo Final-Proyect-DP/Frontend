@@ -125,7 +125,6 @@ jobs:
       matrix:
         ec2_instance: 
           - ec2-44-204-4-160.compute-1.amazonaws.com
-
     steps:
       - name: Deploy Container
         uses: appleboy/ssh-action@v1.0.0
