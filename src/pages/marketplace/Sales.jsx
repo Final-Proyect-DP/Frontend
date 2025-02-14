@@ -7,6 +7,11 @@ const UPDATE_PRODUCT_SERVER = import.meta.env.VITE_API_UPDATE_PRODUCT;
 const GET_CATEGORY_SERVER = import.meta.env.VITE_API_GET_CATEGORY;
 const DELETE_PRODUCT_SERVER = import.meta.env.VITE_API_DELETE_PRODUCT;
 
+console.log('VITE_API_GET_USER_ITEMS:', GET_USER_ITEMS_SERVER);
+console.log('VITE_API_UPDATE_PRODUCT:', UPDATE_PRODUCT_SERVER);
+console.log('VITE_API_GET_CATEGORY:', GET_CATEGORY_SERVER);
+console.log('VITE_API_DELETE_PRODUCT:', DELETE_PRODUCT_SERVER);
+
 const fetchUserItems = async (userId) => {
   try {
     const response = await fetch(`${GET_USER_ITEMS_SERVER}/${userId}`, {
