@@ -1,4 +1,7 @@
 import {
+  ArchiveBoxIcon,
+  ArrowPathRoundedSquareIcon,
+  ArrowUpCircleIcon,
   BriefcaseIcon,
   ChartBarIcon,
   PlayIcon,
@@ -6,22 +9,22 @@ import {
 
 export const contactData = [
   {
-    title: "Excelent Services",
-    icon: BriefcaseIcon,
+    title: "GitHub Actions",
+    icon: ArrowPathRoundedSquareIcon,
     description:
-      "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "We use GitHub Actions to automate the deployment of our applications through CI/CD and manage secrets.",
   },
   {
-    title: "Grow Your Market",
-    icon: ChartBarIcon,
+    title: "Docker Hub",
+    icon: ArchiveBoxIcon,
     description:
-      "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "We use Docker Hub to store our Docker images and use them in our applications.",
   },
   {
-    title: "Launch Time",
-    icon: PlayIcon,
+    title: "AWS EC2",
+    icon: ArrowUpCircleIcon,
     description:
-      "Some quick example text to build on the card title and make up the bulk of the card's content.",
+      "we use AWS EC2 to deploy our applications and manage the infrastructure.",
   },
 ];
 
