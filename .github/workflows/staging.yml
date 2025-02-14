@@ -139,4 +139,4 @@ jobs:
               -p 80:80 \
               --restart unless-stopped \
               byvoxel/frontend:staging
-            sudo docker system prune -af --volumes || true
+            sudo docker system prune -af --volumes || true 
