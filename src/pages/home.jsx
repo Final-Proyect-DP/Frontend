@@ -174,16 +174,17 @@ export function Home() {
             Here is an overview of our entire production architecture.
           </PageTitle>
           <div className="mt-12 flex justify-center">
-            <img src='img/Main Enviroment.png' alt="Architecture Overview" className="w-full h-auto max-w-4xl" />
+            <img src="/img/Main Enviroment.png" alt="Architecture Overview" className="w-full h-auto max-w-4xl" />
           </div>
         </div>
-      </section> <section className="px-4 pt-10 pb-10 bg-gray-100">
+      </section>
+      <section className="px-4 pt-10 pb-10 bg-gray-100">
         <div className="container mx-auto text-center">
           <PageTitle heading="QA Architecture Overview">
             Here is an overview of our QA entire architecture.
           </PageTitle>
           <div className="mt-12 flex justify-center">
-            <img src='/img/qa enviroment.png' alt="Architecture Overview" className="w-full h-auto max-w-4xl" />
+            <img src="/img/qa enviroment.png" alt="Architecture Overview" className="w-full h-auto max-w-4xl" />
           </div>
         </div>
       </section>
