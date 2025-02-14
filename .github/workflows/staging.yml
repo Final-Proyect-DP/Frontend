@@ -2,7 +2,7 @@ name: Push to QA Environment
 
 on:
   push:
-    branches: [Pruebas]
+    branches: [staging]
 
 jobs:
   build_docker_image:
@@ -38,9 +38,6 @@ jobs:
           VITE_API_FETCH_CHATS: ${{ secrets.VITE_API_FETCH_CHATS }}
           VITE_API_START_CHAT: ${{ secrets.VITE_API_START_CHAT }}
           VITE_API_FETCH_MESSAGES: ${{ secrets.VITE_API_FETCH_MESSAGES }}
-          VITE_API_GET_USER_ITEMS: ${{ secrets.VITE_API_GET_USER_ITEMS }}
-          VITE_API_UPDATE_PRODUCT: ${{ secrets.VITE_API_UPDATE_PRODUCT }}
-          VITE_API_DELETE_PRODUCT: ${{ secrets.VITE_API_DELETE_PRODUCT }}
         run: |
           echo "VITE_API_LOGIN=${VITE_API_LOGIN}" > .env
           echo "VITE_API_LOGOUT=${VITE_API_LOGOUT}" >> .env
@@ -62,9 +59,6 @@ jobs:
           echo "VITE_API_FETCH_CHATS=${VITE_API_FETCH_CHATS}" >> .env
           echo "VITE_API_START_CHAT=${VITE_API_START_CHAT}" >> .env
           echo "VITE_API_FETCH_MESSAGES=${VITE_API_FETCH_MESSAGES}" >> .env
-          echo "VITE_API_GET_USER_ITEMS=${VITE_API_GET_USER_ITEMS}" >> .env
-          echo "VITE_API_UPDATE_PRODUCT=${VITE_API_UPDATE_PRODUCT}" >> .env
-          echo "VITE_API_DELETE_PRODUCT=${VITE_API_DELETE_PRODUCT}" >> .env
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -103,16 +97,13 @@ jobs:
             VITE_API_GET_PRODUCTS=${{ secrets.VITE_API_GET_PRODUCTS }}
             VITE_API_GET_PRODUCTS_BY_ID=${{ secrets.VITE_API_GET_PRODUCTS_BY_ID }}
             VITE_API_GET_CATEGORY=${{ secrets.VITE_API_GET_CATEGORY }}
-            VITE_API_GET_CATEGORY_BY_ID=${{ secrets.VITE_API_GET_CATEGORY_BY_ID }}
+            VITE_API_GET_CATEGORY_BY_ID=${{ secrets.VITE_API_GET_CATEGORY_BY_ID }}            
             VITE_API_GET_USER_BY_ID=${{ secrets.VITE_API_GET_USER_BY_ID }}
             VITE_API_CREATE_PRODUCT=${{ secrets.VITE_API_CREATE_PRODUCT }}
             VITE_API_SOCKET=${{ secrets.VITE_API_SOCKET }}
             VITE_API_FETCH_CHATS=${{ secrets.VITE_API_FETCH_CHATS }}
             VITE_API_START_CHAT=${{ secrets.VITE_API_START_CHAT }}
             VITE_API_FETCH_MESSAGES=${{ secrets.VITE_API_FETCH_MESSAGES }}
-            VITE_API_GET_USER_ITEMS=${{ secrets.VITE_API_GET_USER_ITEMS }}
-            VITE_API_UPDATE_PRODUCT=${{ secrets.VITE_API_UPDATE_PRODUCT }}
-            VITE_API_DELETE_PRODUCT=${{ secrets.VITE_API_DELETE_PRODUCT }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -123,7 +114,7 @@ jobs:
     strategy:
       matrix:
         ec2_instance: 
-          - ec2-3-83-235-149.compute-1.amazonaws.com
+          - ec2-52-91-70-97.compute-1.amazonaws.com
 
     steps:
       - name: Deploy Container
@@ -131,7 +122,7 @@ jobs:
         with:
           host: ${{ matrix.ec2_instance }}
           username: ec2-user
-          key: ${{ secrets.EC2_SSH_KEY_FRONT }}
+          key: ${{ secrets.EC2_SSH_KEY_MIXED }}
           port: 22
           timeout: "120s"
           script: |
