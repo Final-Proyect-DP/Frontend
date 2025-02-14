@@ -2,7 +2,7 @@ name: Push to QA Environment
 
 on:
   push:
-    branches: [staging]
+    branches: [Pruebas]
 
 jobs:
   build_docker_image:
